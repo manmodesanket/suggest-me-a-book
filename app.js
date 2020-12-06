@@ -4,10 +4,28 @@ import ReactDOM from 'react-dom';
 
 const bookDB = {
     fiction: [
-      { name: "War and Peace", author: "Leo Tolstoy", rating: "4/5", description: "Often called the best novel ever written. Dozens of characters, stretching from Muscovite peasants all the way to Napoleon himself. The modern epic." },
-      { name: "Lolita", author: "Vladimir Nobokov", rating: "4.1/5", description: "The scandalous love story of a man and a 12-year-old girl. As beautifully written as it is disturbing."},
-      { name: "The Great Gatsby", author: "F. Scott Fitzgerald", rating: "4.5/5", description: "One of the “Great American Novels.” Timeless story of class divisions, love and the inevitability of loneliness."}
-
+        {
+            name: "War and Peace", 
+            author: "Leo Tolstoy", 
+            rating: "4/5", 
+            description: "Often called the best novel ever written. Dozens of characters, stretching from Muscovite peasants all the way to Napoleon himself. The modern epic." },
+        { 
+            name: "Lolita", 
+            author: "Vladimir Nobokov",
+            rating: "4.1/5",
+            description: "The scandalous love story of a man and a 12-year-old girl. As beautifully written as it is disturbing."},
+        { 
+            name: "The Great Gatsby",
+            author: "F. Scott Fitzgerald",
+            rating: "4.5/5",
+            description: "One of the “Great American Novels.” Timeless story of class divisions, love and the inevitability of loneliness."
+        },
+        {
+            name: "The Greated Adventures of Sherlock Holmes",
+            author: "Sir Arthur Conon Doyle",
+            rating: "4.5/5",
+            description: "Sherlock Holmes is the greatest detective in all fiction, and his adventures are among the finest capers committed to the printed page. Rightly regarded as the Great Detective, Holmes sees clues that others overlook, and displays skills of detection that are nearly as uncanny as they are . . . elementary."
+        }
     ],
   
     poetry: [
@@ -41,10 +59,12 @@ const bookDB = {
 
 const App = () => {
     let [books, setBooks] = useState(bookDB["fiction"]);
+    let [current, setCurrent] = useState("fiction")
     const genres = ["fiction", "poetry", "short_story"];
 
     let getBooks = (genre) => {
         let bookList = bookDB[genre];
+        setCurrent(genre);
         setBooks(bookList);
     }
 
@@ -57,7 +77,10 @@ const App = () => {
             <div className="buttons">
                 {
                     genres.map((genre) => {
-                    return <button className="btn" key={genre} onClick={() => getBooks(genre)}>{genre}</button>
+                        if(genre === current) {
+                            return <button className="btn" key={genre} style={{backgroundColor: "lightblue"}} onClick={() => getBooks(genre)}>{genre}</button>
+                        }
+                        return <button className="btn" key={genre} onClick={() => getBooks(genre)}>{genre}</button>
                     })
                 }
             </div>

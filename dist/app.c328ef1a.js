@@ -29813,6 +29813,11 @@ var bookDB = {
     author: "F. Scott Fitzgerald",
     rating: "4.5/5",
     description: "One of the “Great American Novels.” Timeless story of class divisions, love and the inevitability of loneliness."
+  }, {
+    name: "The Greated Adventures of Sherlock Holmes",
+    author: "Sir Arthur Conon Doyle",
+    rating: "4.5/5",
+    description: "Sherlock Holmes is the greatest detective in all fiction, and his adventures are among the finest capers committed to the printed page. Rightly regarded as the Great Detective, Holmes sees clues that others overlook, and displays skills of detection that are nearly as uncanny as they are . . . elementary."
   }],
   poetry: [{
     name: "Milk and Honey",
@@ -29844,10 +29849,16 @@ var App = function App() {
       books = _useState2[0],
       setBooks = _useState2[1];
 
+  var _useState3 = (0, _react.useState)("fiction"),
+      _useState4 = _slicedToArray(_useState3, 2),
+      current = _useState4[0],
+      setCurrent = _useState4[1];
+
   var genres = ["fiction", "poetry", "short_story"];
 
   var getBooks = function getBooks(genre) {
     var bookList = bookDB[genre];
+    setCurrent(genre);
     setBooks(bookList);
   };
 
@@ -29858,6 +29869,19 @@ var App = function App() {
   }, /*#__PURE__*/_react.default.createElement("h1", null, "suggest me a book"), /*#__PURE__*/_react.default.createElement("p", null, "want to read a new book! find right here!")), /*#__PURE__*/_react.default.createElement("div", {
     className: "buttons"
   }, genres.map(function (genre) {
+    if (genre === current) {
+      return /*#__PURE__*/_react.default.createElement("button", {
+        className: "btn",
+        key: genre,
+        style: {
+          backgroundColor: "lightblue"
+        },
+        onClick: function onClick() {
+          return getBooks(genre);
+        }
+      }, genre);
+    }
+
     return /*#__PURE__*/_react.default.createElement("button", {
       className: "btn",
       key: genre,
@@ -29902,7 +29926,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62109" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60448" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
